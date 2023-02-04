@@ -15,6 +15,8 @@
 #include <list>
 #include <vector>
 
+#include <string>
+
 #include "list.h"
 
 // #include <boost/asio.hpp>
