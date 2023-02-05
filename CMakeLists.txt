@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(CMAKE_CXX_FLAGS "-g")
 
-aux_source_directory(${PROJECT_SOURCE_DIR} DIR_SRCS)
+aux_source_directory(${PROJECT_SOURCE_DIR}/src DIR_SRCS)
 
 include_directories(
     #/usr/local/boost/include/
