@@ -32,10 +32,12 @@ using namespace std;
 
 string FILENAME;
 
+#ifndef Print
 #define Print(format, args...) 	\
 do { \
-    fprintf(stdout, "[%s][%d] " format "\n", __FILE__, __LINE__, ##args); \
+	fprintf(stdout, "[%s][%d] " format "\n", __FILE__, __LINE__, ##args); \
 } while(0) 
+#endif
 
 typedef struct N {
 	int a;
@@ -105,23 +107,16 @@ public:
 	}
 };
 
-class Pencil {
 
-};
 
 class Book {
 public:
-	Book() {
-		Print("Book");
+	Book() : a(0) {
+		// Print("Book");
 	}
-	
-	// Book(const Book& b) {
-	// 	Print("Book Copy");
-	// }
-	// Book& operator=(const Book& b) {
-	// 	Print("Book =");
-	// 	return *this;
-	// }
+	Book(int a) : a(a) {
+		// Print("Book ");
+	}
 	// ~Book() {
 	// 	Print("~Book");		
 	// }
@@ -132,50 +127,17 @@ public:
 	int a;
 };
 
-typedef struct Tree {
-	Tree() {
-		Print("Tree ctor");
-	}
-}Tree;
-
-
-typedef struct Tool {
-	Tool() {
-		Print("Tool ctor");
-	}
-}Tool;
-
-
-class ListNode : public Tree {
-public:
-	// ListNode() : Tree(), t() {
-	// 	Print("List ctor");
-	// }
-	int val;
-	Tool t;
-};
-
-template<typename T>
-struct Stu {
-	Stu(T t) : num(t){}
-	T num;
-};
 
 int main() {
 	Pretreatment();
 
-	list<int> l;
-
-	vector<int> v;
-	for (int i = 0; i < 50; i++) {
-		v.push_back(i);
-		// Print("%d\t%zu\t%zu", v[i], v.size(), v.capacity());
+	ds::List<Book> l;
+	for (int i = 4; i < 10; ++i) {
+		l.push_front(Book(i));
 	}
-	int sz = 0;
-	sz = distance(v.begin(), v.end());
-	Print("%d", sz);
-	// Print("%d", v.capacity());
-
+	l.traversal();
+	auto a = l.begin();
+	Print("%d", (*a).a);
 
 	// ds::List l;
 	// for (int i = 0; i < 4 ; i++) {
