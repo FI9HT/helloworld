@@ -19,15 +19,6 @@
 
 #include "list.h"
 
-// #include <boost/asio.hpp>
-// #include <boost/asio/deadline_timer.hpp>
-// #include <boost/date_time/posix_time>
-// #include <boost/thread.hpp>
-// #include <boost/function.hpp>
-// #include <boost/bind/bind.hpp>
-// #include <boost/shared_ptr.hpp>
-// #include <boost/thread/mutex.hpp>
-
 using namespace std;
 
 string FILENAME;
@@ -39,16 +30,6 @@ do { \
 } while(0) 
 #endif
 
-typedef struct N {
-	int a;
-	int b;
-	bool operator< (const N &n) const {
-		if (a == n.a) {
-			return b < n.b;
-		}
-		return a < n.a;
-	}
-}N;
 
 void dealSignal(int signum) {
 	if (signum == SIGTERM) {
@@ -97,47 +78,41 @@ public:
 	int d_m;
 };
 
-class Rule {
-public:
-	Rule(int num) {
-		Print("Rule");
-	}
-	~Rule() {
-		Print("~Rule");
-	}
-};
-
-
-
 class Book {
 public:
 	Book() : a(0) {
-		// Print("Book");
+		Print("Book ctor");
 	}
 	Book(int a) : a(a) {
-		// Print("Book ");
+		Print("Book param ctor");
 	}
-	// ~Book() {
-	// 	Print("~Book");		
-	// }
-	// void show() {
-	// 	Print("a[%d]", a);
-	// }
+	Book(const Book& b) : a(b.a) {
+		Print("Book copy ctor");
+	}
+	~Book() {
+		Print("~Book %d", a);		
+	}
 
 	int a;
 };
-
 
 int main() {
 	Pretreatment();
 
 	ds::List<Book> l;
-	for (int i = 4; i < 10; ++i) {
-		l.push_front(Book(i));
+	for (int i = 0; i < 1; i++) {
+		l.push_back(Book(i));
 	}
-	l.traversal();
-	auto a = l.begin();
-	Print("%d", (*a).a);
+	// l.traversal();
+
+
+	// ds::List<Book> l;
+	// for (int i = 4; i < 10; ++i) {
+	// 	l.push_front(Book(i));
+	// }
+	// l.traversal();
+	// auto a = l.begin();
+	// Print("%d", (*a).a);
 
 	// ds::List l;
 	// for (int i = 0; i < 4 ; i++) {
